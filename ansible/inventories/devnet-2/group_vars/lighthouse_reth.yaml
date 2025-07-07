@@ -1,0 +1,4 @@
+default_ethereum_client_images:
+  lighthouse: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:pawanjay176-frankenstein
+  reth: docker.ethquokkaops.io/dh/ethpandaops/reth:fusaka-devnet-2
+  mev_boost: docker.ethquokkaops.io/dh/ethpandaops/mev-boost:jtraglia-fulu-eef602e

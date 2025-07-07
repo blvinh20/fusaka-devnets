@@ -21,7 +21,7 @@ ethereum_node_beacon_hostname: "bn.{{ server_fqdn }}"
 
 ### Checkpoint sync specific for Ansible & Kubernetes
 checkpoint_sync_node: bootnode-1
-ethereum_node_cl_checkpoint_sync_enabled: false
+ethereum_node_cl_checkpoint_sync_enabled: true
 checkpoint_sync_url: https://checkpoint-sync.{{ ethereum_network_name }}.{{ domain }}
 #checkpoint_sync_url: https://{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}@bn.{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
 checkpoint_sync_url_kube: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.{{ checkpoint_sync_node }}.{{ ethereum_network_name }}.{{ domain }}
@@ -149,8 +149,15 @@ ethereum_node_docker_watchtower_containers_list:
 docker_watchtower_container_additional_args:
   - --interval=900
 ethereum_node_json_rpc_snooper_engine_enabled: true
-ethereum_node_json_rpc_snooper_engine_port: 8561
 ethereum_node_json_rpc_snooper_engine_name: "snooper-engine"
+ethereum_node_json_rpc_snooper_engine_port: 8561
+ethereum_node_json_rpc_snooper_engine_public_port: 8961
+ethereum_node_json_rpc_snooper_engine_container_env:
+  SNOOPER_API_PORT: "{{ ethereum_node_json_rpc_snooper_engine_public_port | quote }}"
+  SNOOPER_API_AUTH: "{{ secret_nginx_shared_basic_auth.name }}:{{ secret_nginx_shared_basic_auth.password }}"
+
+# role: ethpandaops.general.generate_kubernetes_config
+gen_kubernetes_config_dora_execution_snooper_port: 8961
 
 # role: ethpandaops.general.xatu_sentry
 xatu_sentry_container_image: "{{ default_tooling_images.xatu_sentry }}"
