@@ -53,6 +53,7 @@ erigon_container_command_default:
   - --metrics.port={{ erigon_ports_metrics }}
 erigon_container_command_extra_args:
   - --http.api=eth,erigon,engine,web3,net,debug,trace,txpool,admin
+  - --log.console.verbosity=debug
   - --http.vhosts=*
   - --ws
   - --no-downloader
@@ -75,6 +76,7 @@ prometheus_config: |
       testnet: "{{ ethereum_network_name }}"
       execution_client: "{{ ethereum_node_el }}"
       consensus_client: "{{ ethereum_node_cl }}"
+      supernode: "{{ ethereum_node_cl_supernode_enabled | bool | default(false) }}"
   remote_write:
     - queue_config:
         batch_send_deadline: 5s
@@ -112,7 +114,6 @@ prometheus_config: |
         - targets: ["{{ vars[ethereum_node_cl + '_container_name'] }}:{{ ethereum_node_cl_ports_metrics }}"]
           labels:
             instance: "{{ ethereum_network_name }}-{{ inventory_hostname }}"
-            supernode: "{{ ethereum_node_cl_supernode_enabled | bool | default(false) }}"
     - job_name: "execution"
       metrics_path: "/debug/metrics/prometheus"
       static_configs:
