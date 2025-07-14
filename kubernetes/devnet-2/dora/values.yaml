@@ -159,6 +159,8 @@ dora:
     712-715: teku-nimbusel-2
     716-719: teku-reth-2
     720-727: bootnode-1
+    728-729: deposit-tester
+    730-735: caplin
 
   endpoints:
   # Rpc
