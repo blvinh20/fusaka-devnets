@@ -104,39 +104,54 @@ mev_relay_website_container_command_extra_args:
 
 
 # role: ethpandaops.general.ethereum_node
-ethereum_node_cl: lighthouse
+ethereum_node_cl: prysm
 ethereum_node_mev_boost_enabled: false
 
-lighthouse_checkpoint_sync_enabled: true
-
-# role: ethpandaops.general.lighthouse
-lighthouse_container_name: beacon
-lighthouse_container_image: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:fusaka-devnet-2
-lighthouse_container_env:
+prysm_checkpoint_sync_enabled: true
+prysm_container_tty: true
+# role: ethpandaops.general.prysm
+prysm_container_name: beacon
+prysm_container_image: docker.ethquokkaops.io/dh/ethpandaops/prysm-beacon-chain:fusaka-devnet-2
+prysm_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-lighthouse_container_volumes:
-  - "{{ lighthouse_datadir }}:/data"
-  - "{{ lighthouse_auth_jwt_path }}:/execution-auth.jwt:ro"
+prysm_container_volumes:
+  - "{{ prysm_datadir }}:/data"
+  - "{{ prysm_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-lighthouse_container_command_extra_args:
-  - --testnet-dir=/network-config
-  - --boot-nodes={{ ethereum_cl_bootnodes | join(',') }}
-  - --debug-level=debug
-  - --always-prepare-payload
-  - --prepare-payload-lookahead=12000
-  - --disable-peer-scoring
-  - --suggested-fee-recipient={{ ethereum_node_cl_validator_fee_recipient }}
 
-lighthouse_container_pull: true
-
+prysm_container_command_extra_args:
+  - --grpc-gateway-corsdomain=*
+  - --chain-config-file=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
+  - --contract-deployment-block={{ ethereum_network_deposit_contract_block }}
+  - --min-sync-peers=1
+  - --pprof
+  - --enable-debug-rpc-endpoints
+  - --verbosity=debug
+  - --subscribe-all-subnets
+  - --prepare-all-payloads
+prysm_container_command_extra_args: >-
+  {{ prysm_container_command_extra_simple_args + prysm_container_command_extra_bootnode_args }}
+prysm_container_pull: true
+prysm_container_command_extra_bootnode_args: >-
+  {{ ethereum_cl_bootnodes | map('regex_replace', '^', '--bootstrap-node=') | list }}
+prysm_container_entrypoint:
+  - /app/cmd/beacon-chain/beacon-chain
 
 ethereum_el_bootnodes:
   - "{{ hostvars['bootnode-1']['ethereum_node_fact_el_enode'] }}"
 
 ethereum_cl_bootnodes:
   - "{{ hostvars['bootnode-1']['cl_bootnode_fact_enr'] }}"
+  - "{{ hostvars['bootnode-1']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['lighthouse-geth-1']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['teku-geth-2']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['prysm-geth-2']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['nimbus-geth-2']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['lodestar-geth-2']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['grandine-geth-2']['ethereum_node_fact_cl_enr'] }}"
 
 
 # role: ethpandaops.general.ethereum_node
