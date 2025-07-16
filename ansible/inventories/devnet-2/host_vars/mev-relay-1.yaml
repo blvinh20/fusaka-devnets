@@ -3,6 +3,7 @@ bootstrap_default_user_authorized_keys_github_team_el:
   - avalonche
   - Wazzymandias
   - bharath-123
+  - michaelsproul
 
 mev_relay_cleanup_all: false
 
@@ -106,11 +107,11 @@ mev_relay_website_container_command_extra_args:
 ethereum_node_cl: lighthouse
 ethereum_node_mev_boost_enabled: false
 
-lighthouse_checkpoint_sync_enabled: false
+lighthouse_checkpoint_sync_enabled: true
 
 # role: ethpandaops.general.lighthouse
 lighthouse_container_name: beacon
-lighthouse_container_image: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:pawanjay176-frankenstein
+lighthouse_container_image: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:fusaka-devnet-2
 lighthouse_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
