@@ -12,7 +12,6 @@ xatu-cannon:
     requests:
       cpu: 256m
       memory: 512Mi
-  replicas: 0
   config:
     logging: "info"
     metricsAddr: ":9090"
@@ -93,7 +92,7 @@ xatu-cannon:
     tracing:
       enabled: false
     ethereum:
-      beaconNodeAddress: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-1.fusaka-devnet-2.ethpandaops.io
+      beaconNodeAddress: http://prysm-geth-001:5052
       overrideNetworkName: fusaka-devnet-2
       beaconNodeHeaders: {}
       blockCacheSize: 300
