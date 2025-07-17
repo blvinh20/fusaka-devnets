@@ -3,7 +3,7 @@ xatu-cannon:
   fullnameOverride: xatu-cannon
   image:
     repository: docker.ethquokkaops.io/dh/ethpandaops/xatu
-    tag: 0.0.5-fulu
+    tag: 1.2.0
     pullPolicy: IfNotPresent
   resources:
     limits:
@@ -12,7 +12,7 @@ xatu-cannon:
     requests:
       cpu: 256m
       memory: 512Mi
-
+  replicas: 0
   config:
     logging: "info"
     metricsAddr: ":9090"
