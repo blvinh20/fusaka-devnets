@@ -51,7 +51,7 @@ locals {
           "${i + 1}" = {
             tags   = "group_name:${vm_group.name},val_start:${vm_group.validator_start + (i * (vm_group.validator_end - vm_group.validator_start) / vm_group.count)},val_end:${min(vm_group.validator_start + ((i + 1) * (vm_group.validator_end - vm_group.validator_start) / vm_group.count), vm_group.validator_end)},supernode:${i % 2 == 0 ? "True" : "False"}"
             region = try(vm_group.region, var.digitalocean_regions[i % length(var.digitalocean_regions)])
-            size   = try(vm_group.size, local.digitalocean_default_size)
+            size   = try(vm_group.size, i % 2 == 0 ? "s-8vcpu-16gb-480gb-intel" : "s-8vcpu-16gb")
             ipv6   = try(vm_group.ipv6, true)
           }
         }

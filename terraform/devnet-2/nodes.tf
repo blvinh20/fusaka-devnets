@@ -6,6 +6,7 @@ variable "bootnode" {
     validator_start = 0
     validator_end   = 0
     region          = "ams3"
+    size            = "s-8vcpu-16gb-480gb-intel"
   }
 }
 
@@ -15,6 +16,7 @@ variable "mev_relay" {
     count           = 1
     validator_start = 0
     validator_end   = 0
+    size            = "s-8vcpu-32gb-amd"
   }
 }
 
