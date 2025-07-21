@@ -61,7 +61,7 @@ mev_relay_api_container_env:
 mev_relay_api_container_pull: true
 mev_relay_api_container_networks: "{{ mev_relay_docker_networks }}"
 mev_relay_api_container_ports:
-  - "{{ mev_relay_api_listening_port }}:{{ mev_relay_api_listening_port }}"
+  - "0.0.0.0:{{ mev_relay_api_listening_port }}:{{ mev_relay_api_listening_port }}"
 mev_relay_api_container_command_extra_args:
   - --network=custom
   - --beacon-uris={{ beacon_endpoint }}
