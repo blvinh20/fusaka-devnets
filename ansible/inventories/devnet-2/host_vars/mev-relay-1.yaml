@@ -1,4 +1,3 @@
----
 bootstrap_default_user_authorized_keys_github_team_el:
   - avalonche
   - Wazzymandias
@@ -15,7 +14,7 @@ mev_relay_docker_networks:
 
 beacon_endpoint: http://beacon:5052
 
-gen_validators_root: "0x31c7fb3b0dc46ad79c8117cbeafe6060a973f662823b08618d915b644472449d"
+gen_validators_root: "0xd9d36cce7e1e5b021676d15cbc674ec2e02183a98373ca191a3cbcefca479f9b"
 
 # ------------------------------------------------------------------
 # mev-relay-housekeeper
@@ -99,7 +98,7 @@ mev_relay_website_container_command_extra_args:
   - --db=postgres://postgres:postgres@mev-relay-database:5432/boostrelay?sslmode=disable
   - --show-config-details
   - --listen-addr=0.0.0.0:9060
-  - https://0xa55c1285d84ba83a5ad26420cd5ad3091e49c55a813eee651cd467db38a8c8e63192f47955e9376f6b42f6d190571cb5@mev-relay-1.{{ network_subdomain }}:9062
+  - https://0xa55c1285d84ba83a5ad26420cd5ad3091e49c55a813eee651cd467db38a8c8e63192f47955e9376f6b42f6d190571cb5@mev-relay-api.{{ network_subdomain }}:9062
 
 
 
@@ -163,10 +162,10 @@ reth_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_rcp_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_el_ports_http_rpc | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_rcp_hostname }}"
-  BUILDER_TX_SIGNING_KEY: 0x{{ secret_mev_signingkey }}
-  COINBASE_SECRET_KEY: 0x{{ secret_mev_signingkey }}
-  RELAY_SECRET_KEY: 0x{{ secret_mev_signingkey }}
-  OPTIMISTIC_RELAY_SECRET_KEY: 0x{{ secret_mev_signingkey }}
+  BUILDER_TX_SIGNING_KEY: "{{ secret_mev_signingkey }}"
+  COINBASE_SECRET_KEY: "{{ secret_mev_signingkey }}"
+  RELAY_SECRET_KEY: "{{ secret_mev_signingkey }}"
+  OPTIMISTIC_RELAY_SECRET_KEY: "{{ secret_mev_signingkey }}"
 
 reth_container_command_extra_args:
   - --chain=/network-config/genesis.json
@@ -215,7 +214,7 @@ reth_rbuilder_config: |
   root_hash_use_sparse_trie=true
   root_hash_compare_sparse_trie=false
 
-  subsidy=1
+  subsidy = "1"
 
   [[relays]]
   name = "flashbots"
