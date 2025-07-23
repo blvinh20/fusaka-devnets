@@ -145,12 +145,6 @@ ethereum_el_bootnodes:
 ethereum_cl_bootnodes:
   - "{{ hostvars['bootnode-1']['cl_bootnode_fact_enr'] }}"
   - "{{ hostvars['bootnode-1']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['lighthouse-geth-1']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['teku-geth-2']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['prysm-geth-2']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['nimbus-geth-2']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['lodestar-geth-2']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['grandine-geth-2']['ethereum_node_fact_cl_enr'] }}"
 
 
 # role: ethpandaops.general.ethereum_node
