@@ -62,3 +62,10 @@ execution_node
 
 [mev_boost:children]
 consensus_node
+
+[arm]
+%{ for key, host in hosts ~}
+%{ if can(regex("arm", key)) ~}
+${host.hostname}
+%{ endif ~}
+%{ endfor ~}
