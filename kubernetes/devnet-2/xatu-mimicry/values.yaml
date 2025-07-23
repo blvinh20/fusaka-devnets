@@ -3,7 +3,7 @@ xatu-mimicry:
   fullnameOverride: xatu-mimicry
   image:
     repository: docker.ethquokkaops.io/dh/ethpandaops/xatu
-    tag: 0.0.5-fulu
+    tag: 1.2.4
     pullPolicy: IfNotPresent
   resources:
     limits:

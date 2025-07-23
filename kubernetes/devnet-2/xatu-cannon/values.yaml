@@ -3,7 +3,7 @@ xatu-cannon:
   fullnameOverride: xatu-cannon
   image:
     repository: docker.ethquokkaops.io/dh/ethpandaops/xatu
-    tag: 1.2.0
+    tag: 1.2.4
     pullPolicy: IfNotPresent
   resources:
     limits:
