@@ -228,16 +228,16 @@ resource "digitalocean_firewall" "main" {
 }
 
 resource "digitalocean_firewall" "mev_relay" {
-  name = "${var.ethereum_network}-nodes-mev-relay"
+  name        = "${var.ethereum_network}-nodes-mev-relay"
   droplet_ids = [digitalocean_droplet.main["mev-relay-1"].id]
-  
+
   // mev-relay ports
   inbound_rule {
     protocol         = "tcp"
     port_range       = "9060-9062"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
-  
+
   // Allow all outbound traffic
   outbound_rule {
     protocol              = "tcp"
