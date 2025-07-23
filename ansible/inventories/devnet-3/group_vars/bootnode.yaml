@@ -12,7 +12,7 @@ eth_inventory_web_container_env:
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
 ethereum_node_cl: teku
-ethereum_node_cl_validator_enabled: true
+ethereum_node_cl_validator_enabled: false
 
 
 # role: validator_keys
