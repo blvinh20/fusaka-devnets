@@ -49,6 +49,9 @@ dora:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"
 
+  ranges: |
+    816-817: caplin
+
   endpoints:
   # Rpc
   - url: http://prysm-geth-001:5052
