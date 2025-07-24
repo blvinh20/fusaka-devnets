@@ -22,10 +22,10 @@ default_ethereum_client_images:
 default_tooling_images:
   mev_builder: docker.ethquokkaops.io/dh/ethpandaops/reth-rbuilder:bharath-123-fusaka-devnet-3
   mev_relay: docker.ethquokkaops.io/dh/ethpandaops/mev-boost-relay:bharath-123-bharath-fulu-c376661
-  xatu_sentry: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.2.4
-  xatu_cannon: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.2.4
-  xatu_mimicry: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.2.4
-  xatu_cl_mimicry: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.2.4
+  xatu_sentry: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.3.1
+  xatu_cannon: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.3.1
+  xatu_mimicry: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.3.1
+  xatu_cl_mimicry: docker.ethquokkaops.io/dh/ethpandaops/xatu:1.3.1
   ethereum_metrics_exporter: docker.ethquokkaops.io/dh/ethpandaops/ethereum-metrics-exporter:latest
   tx_fuzz: docker.ethquokkaops.io/dh/ethpandaops/tx-fuzz:latest
   forkmon: docker.ethquokkaops.io/dh/skylenet/nodemonitor:darkmode
