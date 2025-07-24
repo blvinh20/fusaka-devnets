@@ -69,6 +69,14 @@
   roles:
     - role: ethpandaops.general.ethereum_node
       tags: [ethereum, ethereum_node]
+    - role: ethpandaops.general.traffic_control
+      when: ethereum_node_cl_supernode_enabled == false
+      vars:
+        traffic_control_rules:
+          - interface: eth0
+            rate_download: 50mbit
+            rate_upload: 50mbit
+      tags: [traffic_control]
 
 - hosts: ethereum_node
   become: true
