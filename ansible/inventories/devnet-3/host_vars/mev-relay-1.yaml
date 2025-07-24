@@ -234,3 +234,13 @@ reth_rbuilder_config: |
   sorting = "max-profit"
   failed_order_retries = 1
   drop_failed_orders = true
+
+ethereum_node_docker_watchtower_containers_list:
+  - execution
+  - beacon
+  - validator
+  - xatu-sentry
+  - mev-relay-housekeeper
+  - mev-relay-api
+  - mev-relay-website
+
