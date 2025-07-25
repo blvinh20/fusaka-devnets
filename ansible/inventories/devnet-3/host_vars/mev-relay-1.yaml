@@ -14,7 +14,7 @@ mev_relay_docker_networks:
 
 beacon_endpoint: http://beacon:5052
 
-gen_validators_root: "0xcc035152f11f27d28052258102bc75091ca9bbd9ca6bb2fdaefef9570d917c18"
+gen_validators_root: "{{ lookup('file', eth_testnet_config_local_dir_src + 'genesis_validators_root.txt') }}"
 
 # ------------------------------------------------------------------
 # mev-relay-housekeeper
