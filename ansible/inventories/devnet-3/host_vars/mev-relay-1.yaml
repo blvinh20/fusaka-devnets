@@ -58,6 +58,7 @@ mev_relay_api_container_env:
   LOG_LEVEL=debug
   DISABLE_PAYLOAD_DATABASE_STORAGE=1
   ENABLE_BUILDER_CANCELLATIONS=1
+  BLOCKSIM_MAX_CONCURRENT=0
 mev_relay_api_container_pull: true
 mev_relay_api_container_networks: "{{ mev_relay_docker_networks }}"
 mev_relay_api_container_ports:
