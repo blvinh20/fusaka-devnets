@@ -54,7 +54,7 @@ dora:
 
   mevRelays:
     - index: 0
-      name: PandaOps
+      name: Flashbots
       url: http://mev-relay-1.fusaka-devnet-3.ethpandaops.io:9062/
 
   endpoints:
