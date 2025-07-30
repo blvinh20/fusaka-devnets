@@ -36,7 +36,6 @@ besu_container_command_extra_args:
   - --bonsai-limit-trie-logs-enabled=false
   - --target-gas-limit=45000000
 besu_container_pull: true
-ethereum_node_ipv6_enabled: false
 prometheus_config: |
   global:
     scrape_interval: 12s

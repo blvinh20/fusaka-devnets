@@ -169,7 +169,7 @@ reth_container_env:
 reth_container_command_extra_args:
   - --chain=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
-  - --http.api=trace,rpc,eth,net,debug,web3,admin,flashbots
+  - --http.api=trace,rpc,eth,net,debug,web3,admin,flashbots,txpool
   - --builder.gaslimit=45000000
   - --engine.persistence-threshold=0
   - --engine.memory-block-buffer-target=0
@@ -206,7 +206,7 @@ reth_rbuilder_config: |
   genesis_fork_version = "0x10{{ ethereum_genesis_fork_version_suffix }}"
 
   sbundle_mergeable_signers = []
-  live_builders = ["mp-ordering", "mgp-ordering"]
+  live_builders = ["mp-ordering"]
 
   enabled_relays = ["flashbots"]
 
@@ -221,15 +221,6 @@ reth_rbuilder_config: |
   priority = 0
   use_ssz_for_submit = false
   use_gzip_for_submit = false
-
-
-  [[builders]]
-  name = "mgp-ordering"
-  algo = "ordering-builder"
-  discard_txs = true
-  sorting = "mev-gas-price"
-  failed_order_retries = 1
-  drop_failed_orders = true
 
   [[builders]]
   name = "mp-ordering"
