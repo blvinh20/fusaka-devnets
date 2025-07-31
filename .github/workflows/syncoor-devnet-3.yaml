@@ -1,10 +1,12 @@
 name: Syncoor
 
 on:
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
   workflow_dispatch:
     inputs:
       network:
-        description: 'Network to test (e.g., hoodi, sepolia, mainnet)'
+        description: 'Network to test'
         required: false
         default: '"fusaka-devnet-3"'
         type: string
@@ -21,7 +23,7 @@ on:
       run-timeout:
         description: 'Timeout for the sync test'
         required: false
-        default: '60m'
+        default: '10h'
         type: string
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
@@ -61,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        network: ${{ fromJSON(format('[{0}]', inputs.network || '"hoodi"')) }}
+        network: ${{ fromJSON(format('[{0}]', inputs.network || '"fusaka-devnet-3"')) }}
         el-client: >-
           ${{
             fromJSON(format('[{0}]', inputs.el-client || '
