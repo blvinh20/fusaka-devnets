@@ -32,7 +32,7 @@ syncoor-web:
             "syncoorApiEndpoints": [
               {
                 "name": "Syncoor",
-                "url": "http://syncoor-api.fusaka-devnet-3.ethpandaops.io"
+                "url": "https://syncoor-api.fusaka-devnet-3.ethpandaops.io"
               }
             ]
           }
