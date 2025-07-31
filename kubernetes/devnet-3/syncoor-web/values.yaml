@@ -38,6 +38,7 @@ syncoor-web:
           }
   ingress:
     main:
+      className: ingress-nginx-public
       enabled: true
       hosts:
         - host: syncoor.fusaka-devnet-3.ethpandaops.io
