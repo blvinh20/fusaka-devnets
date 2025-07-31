@@ -115,7 +115,7 @@ jobs:
         fi
 
     - name: Run Syncoor Test
-      uses: ./
+      uses: ethpandaops/syncoor@main
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         log-force-colors: true
