@@ -5,11 +5,6 @@ on:
     - cron: '0 2 * * *'  # Daily at 2 AM UTC
   workflow_dispatch:
     inputs:
-      network:
-        description: 'Network to test'
-        required: false
-        default: '"fusaka-devnet-3"'
-        type: string
       el-client:
         description: 'Comma-separated list of execution layer clients (geth,besu,nethermind,erigon,reth)'
         required: false
@@ -39,7 +34,6 @@ on:
 env:
   INSTALL_RCLONE_VERSION: v1.68.2
   S3_BUCKET: ethpandaops-syncoor-data
-  S3_PATH: devnets/fusaka-devnet-3
 
 jobs:
   sync:
@@ -63,7 +57,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        network: ${{ fromJSON(format('[{0}]', inputs.network || '"fusaka-devnet-3"')) }}
+        network: ["fusaka-devnet-3"]
         el-client: >-
           ${{
             fromJSON(format('[{0}]', inputs.el-client || '
@@ -143,7 +137,7 @@ jobs:
         report-dir: ./test-reports
         s3-upload: true
         s3-bucket: ${{ env.S3_BUCKET }}
-        s3-path: ${{ env.S3_PATH }}
+        s3-path: devnets/${{ matrix.network }}
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
 
@@ -158,6 +152,6 @@ jobs:
             workflow_id: 'syncoor-generate-index.yaml',
             ref: context.ref,
             inputs: {
-              's3-path': '${{ env.S3_PATH }}'
+              's3-path': 'devnets/${{ matrix.network }}'
             }
           });
