@@ -1,4 +1,4 @@
-# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/spamoor.yaml.j2
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/syncoor-web.yaml.j2
 
 syncoor-web:
   fullnameOverride: syncoor-web
@@ -7,7 +7,7 @@ syncoor-web:
       containers:
         main:
           image:
-            repository: ghcr.io/ethpandaops/syncoor-web
+            repository: docker.ethquokkaops.io/gh/ethpandaops/syncoor-web
             tag: master
             pullPolicy: Always
           resources:
@@ -17,6 +17,7 @@ syncoor-web:
             limits:
               cpu: 200m
               memory: 128Mi
+
   configMaps:
     config:
       enabled: true
@@ -36,6 +37,7 @@ syncoor-web:
               }
             ]
           }
+
   ingress:
     main:
       className: ingress-nginx-public

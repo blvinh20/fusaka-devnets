@@ -1,3 +1,5 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/Chart.yaml.j2
+
 apiVersion: v2
 name: syncoor-server
 description: A Helm chart for Kubernetes
