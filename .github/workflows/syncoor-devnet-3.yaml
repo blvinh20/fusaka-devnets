@@ -2,7 +2,7 @@ name: Syncoor - Devnet 3
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+    - cron: '30 2 * * *'  # Daily at 02:30 UTC
   workflow_dispatch:
     inputs:
       el-client:
@@ -18,7 +18,7 @@ on:
       run-timeout:
         description: 'Timeout for the sync test'
         required: false
-        default: '10h'
+        default: '3h'
         type: string
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
@@ -38,13 +38,14 @@ env:
 jobs:
   sync:
     # Timeouts from h to minutes:
+    # - 4h -> 240m
     # - 6h -> 360m
     # - 8h -> 480m
     # - 12h -> 720m
     # - 24h -> 1440m
     # - 48h -> 2880m
     # - 72h -> 4320m
-    timeout-minutes: 720
+    timeout-minutes: 240 # 4h
     # Self-hosted runner sizes:
     # - ccx13: 2 cores, 8GB, 80GB disk
     # - ccx23: 4 cores, 16GB, 160GB disk
@@ -118,6 +119,8 @@ jobs:
       uses: ethpandaops/syncoor@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        server: https://syncoor-api.fusaka-devnet-3.ethpandaops.io
+        server-auth: ${{ secrets.SYNCOOR_SERVER_AUTH }}
         log-force-colors: true
         client-logs: true
         network: ${{ matrix.network }}
