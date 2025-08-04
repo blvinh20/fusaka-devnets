@@ -31,6 +31,7 @@ spamoor:
   privateKey: "<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.spamoor_private_key}>"
   rpcEndpoints:
   # Rpc
+  - "http://mev-relay-1:8645"
   - "http://geth-prysm-001:8545"
   - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-1.fusaka-devnet-3.ethpandaops.io"
   - "https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.grandine-besu-1.fusaka-devnet-3.ethpandaops.io"

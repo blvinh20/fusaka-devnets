@@ -238,6 +238,13 @@ resource "digitalocean_firewall" "mev_relay" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
+  // mev-relay ports
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "8645"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
   // Allow all outbound traffic
   outbound_rule {
     protocol              = "tcp"
