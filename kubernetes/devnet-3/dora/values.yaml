@@ -49,6 +49,15 @@ dora:
     name: "dora-postgresql"
     fullnameOverride: "dora-postgresql"
 
+  ranges: |
+    816-817: caplin
+
+  mevRelays:
+    - index: 0
+      name: Flashbots
+      url: http://mev-relay-1.fusaka-devnet-3.ethpandaops.io:9062/
+
+
   endpoints:
   # Rpc
   - url: http://prysm-geth-001:5052
