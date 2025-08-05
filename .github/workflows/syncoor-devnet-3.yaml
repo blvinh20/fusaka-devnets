@@ -40,6 +40,11 @@ on:
         required: false
         default: 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master'
         type: string
+      git-ref:
+        description: 'Git reference (branch, tag, or commit) to checkout'
+        required: false
+        default: ''
+        type: string
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
@@ -167,6 +172,7 @@ jobs:
         checkpoint-sync-url: ${{ inputs.checkpoint-sync-url }}
         supernode: ${{ inputs.supernode }}
         image: ${{ inputs.image }}
+        git-ref: ${{ inputs.git-ref }}
 
     - name: Update test results index
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
