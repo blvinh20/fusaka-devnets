@@ -141,7 +141,7 @@ jobs:
         fi
 
     - name: Run Syncoor Test
-      uses: ethpandaops/syncoor@bbusa/supnode-checkpoint
+      uses: ethpandaops/syncoor
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         server: https://syncoor-api.fusaka-devnet-3.ethpandaops.io
