@@ -163,9 +163,9 @@ jobs:
         s3-path: devnets/${{ matrix.network }}
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
-        enable-checkpoint-sync: ${{ inputs.enable-checkpoint-sync != false }}
+        checkpoint-sync-enabled: ${{ inputs.enable-checkpoint-sync }}
         checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || 'checkpoint-sync.fusaka-devnet-3.ethpandaops.io' }}
-        enable-supernode: ${{ inputs.enable-supernode || false }}
+        supernode: ${{ inputs.enable-supernode || false }}
         image: ${{ inputs.image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
 
     - name: Update test results index
