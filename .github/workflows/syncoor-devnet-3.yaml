@@ -20,6 +20,16 @@ on:
         required: false
         default: '3h'
         type: string
+      enable-checkpoint-sync:
+        description: 'Enable checkpoint sync'
+        required: false
+        default: false
+        type: boolean
+      enable-supernode:
+        description: 'Enable supernode mode'
+        required: false
+        default: false
+        type: boolean
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
@@ -116,7 +126,7 @@ jobs:
         fi
 
     - name: Run Syncoor Test
-      uses: ethpandaops/syncoor@master
+      uses: ethpandaops/syncoor@bbusa/supnode-checkpoint
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         server: https://syncoor-api.fusaka-devnet-3.ethpandaops.io
@@ -143,6 +153,8 @@ jobs:
         s3-path: devnets/${{ matrix.network }}
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
+        enable-checkpoint-sync: ${{ inputs.enable-checkpoint-sync || false }}
+        enable-supernode: ${{ inputs.enable-supernode || false }}
 
     - name: Update test results index
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
