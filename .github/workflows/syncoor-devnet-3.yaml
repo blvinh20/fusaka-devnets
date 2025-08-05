@@ -28,7 +28,7 @@ on:
       checkpoint-sync-url:
         description: 'Checkpoint sync URL'
         required: false
-        default: 'checkpoint-sync.fusaka-devnet-3.ethpandaops.io'
+        default: 'https://checkpoint-sync.fusaka-devnet-3.ethpandaops.io'
         type: string
       supernode:
         description: 'Enable supernode mode'
@@ -164,7 +164,7 @@ jobs:
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
         checkpoint-sync-enabled: ${{ inputs.checkpoint-sync-enabled }}
-        checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || 'checkpoint-sync.fusaka-devnet-3.ethpandaops.io' }}
+        checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || 'https://checkpoint-sync.fusaka-devnet-3.ethpandaops.io' }}
         supernode: ${{ inputs.supernode || false }}
         image: ${{ inputs.image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
 
