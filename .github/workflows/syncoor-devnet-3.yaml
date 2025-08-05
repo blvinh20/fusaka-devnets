@@ -23,13 +23,23 @@ on:
       enable-checkpoint-sync:
         description: 'Enable checkpoint sync'
         required: false
-        default: false
+        default: true
         type: boolean
+      checkpoint-sync-url:
+        description: 'Checkpoint sync URL'
+        required: false
+        default: 'checkpoint-sync.fusaka-devnet-3.ethpandaops.io'
+        type: string
       enable-supernode:
         description: 'Enable supernode mode'
         required: false
         default: false
         type: boolean
+      syncoor-image:
+        description: 'Syncoor Docker image'
+        required: false
+        default: 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master'
+        type: string
       el-image:
         description: 'Execution layer client images as JSON (e.g., {"geth": "ethereum/client-go:latest", "besu": "hyperledger/besu:latest"})'
         required: false
@@ -153,8 +163,10 @@ jobs:
         s3-path: devnets/${{ matrix.network }}
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
-        enable-checkpoint-sync: ${{ inputs.enable-checkpoint-sync || false }}
+        enable-checkpoint-sync: ${{ inputs.enable-checkpoint-sync != false }}
+        checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || 'checkpoint-sync.fusaka-devnet-3.ethpandaops.io' }}
         enable-supernode: ${{ inputs.enable-supernode || false }}
+        syncoor-image: ${{ inputs.syncoor-image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
 
     - name: Update test results index
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
