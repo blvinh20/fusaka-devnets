@@ -35,7 +35,7 @@ on:
         required: false
         default: false
         type: boolean
-      syncoor-image:
+      image:
         description: 'Syncoor Docker image'
         required: false
         default: 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master'
@@ -166,7 +166,7 @@ jobs:
         enable-checkpoint-sync: ${{ inputs.enable-checkpoint-sync != false }}
         checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || 'checkpoint-sync.fusaka-devnet-3.ethpandaops.io' }}
         enable-supernode: ${{ inputs.enable-supernode || false }}
-        syncoor-image: ${{ inputs.syncoor-image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
+        image: ${{ inputs.image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
 
     - name: Update test results index
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
