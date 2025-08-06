@@ -71,31 +71,31 @@
         "timestamp": "0x6898ae80",
         "target": 9,
         "max": 14,
-        "baseFeeUpdateFraction": "0x4c6964"
+        "baseFeeUpdateFraction": "0x86c73b"
       },
       {
         "timestamp": "0x689a2e80",
         "target": 14,
         "max": 21,
-        "baseFeeUpdateFraction": "0x4c6964"
+        "baseFeeUpdateFraction": "0xd1a66e"
       },
       {
         "timestamp": "0x689bae80",
         "target": 21,
         "max": 32,
-        "baseFeeUpdateFraction": "0x4c6964"
+        "baseFeeUpdateFraction": "0x13a7aa1"
       },
       {
         "timestamp": "0x689d2e80",
         "target": 32,
         "max": 48,
-        "baseFeeUpdateFraction": "0x4c6964"
+        "baseFeeUpdateFraction": "0x1df3366"
       },
       {
         "timestamp": "0x689eae80",
         "target": 48,
         "max": 72,
-        "baseFeeUpdateFraction": "0x4c6964"
+        "baseFeeUpdateFraction": "0x2cecd2c"
       }
     ],
     "eip7594TransitionTimestamp": "0x68972e80",

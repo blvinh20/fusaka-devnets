@@ -35,27 +35,27 @@
       "bpo1": {
         "target": 9,
         "max": 14,
-        "baseFeeUpdateFraction": 5007716
+        "baseFeeUpdateFraction": 8832827
       },
       "bpo2": {
         "target": 14,
         "max": 21,
-        "baseFeeUpdateFraction": 5007716
+        "baseFeeUpdateFraction": 13739630
       },
       "bpo3": {
         "target": 21,
         "max": 32,
-        "baseFeeUpdateFraction": 5007716
+        "baseFeeUpdateFraction": 20609697
       },
       "bpo4": {
         "target": 32,
         "max": 48,
-        "baseFeeUpdateFraction": 5007716
+        "baseFeeUpdateFraction": 31404902
       },
       "bpo5": {
         "target": 48,
         "max": 72,
-        "baseFeeUpdateFraction": 5007716
+        "baseFeeUpdateFraction": 47107372
       }
     },
     "depositContractAddress": "0x00000000219ab540356cBB839Cbe05303d7705Fa",
