@@ -2,7 +2,7 @@ name: Syncoor - Devnet 3
 
 on:
   schedule:
-    - cron: '30 2 * * *'  # Daily at 02:30 UTC
+    - cron: '*/30 * * * *'  # Daily at 02:30 UTC
   workflow_dispatch:
     inputs:
       el-client:
@@ -16,9 +16,9 @@ on:
         default: '"lighthouse","teku","prysm","nimbus","lodestar","grandine"'
         type: string
       run-timeout:
-        description: 'Timeout for the sync test'
+        description: 'Timeout for the sync test (in minutes)'
         required: false
-        default: '3h'
+        default: '180'
         type: string
       checkpoint-sync-enabled:
         description: 'Enable checkpoint sync'
@@ -70,7 +70,7 @@ jobs:
     # - 24h -> 1440m
     # - 48h -> 2880m
     # - 72h -> 4320m
-    timeout-minutes: 240 # 4h
+    timeout-minutes: ${{ fromJSON(inputs.run-timeout || '240') }}
     # Self-hosted runner sizes:
     # - ccx13: 2 cores, 8GB, 80GB disk
     # - ccx23: 4 cores, 16GB, 160GB disk
@@ -160,7 +160,7 @@ jobs:
             ''
           }}
         check-interval: 30s
-        run-timeout: ${{ inputs.run-timeout || '60m' }}
+        run-timeout: ${{ inputs.run-timeout && format('{0}m', inputs.run-timeout) || '60m' }}
         log-level: info
         report-dir: ./test-reports
         s3-upload: true
@@ -171,7 +171,7 @@ jobs:
         checkpoint-sync-enabled: ${{ inputs.checkpoint-sync-enabled }}
         checkpoint-sync-url: ${{ inputs.checkpoint-sync-url }}
         supernode: ${{ inputs.supernode }}
-        image: ${{ inputs.image }}
+        image: ${{ inputs.image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
         git-ref: ${{ inputs.git-ref }}
 
     - name: Update test results index
