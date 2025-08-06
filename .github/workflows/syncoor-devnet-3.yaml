@@ -2,7 +2,7 @@ name: Syncoor - Devnet 3
 
 on:
   schedule:
-    - cron: '20 * * * *'  # Daily at 02:30 UTC
+    - cron: '*/30 * * * *'  # Daily at 02:30 UTC
   workflow_dispatch:
     inputs:
       el-client:
