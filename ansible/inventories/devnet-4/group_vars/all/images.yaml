@@ -1,0 +1,63 @@
+default_ethereum_client_images:
+### Consensus layer clients
+  lighthouse: docker-cache.ethquokkaops.io/ethpandaops/lighthouse:unstable
+  lodestar: docker-cache.ethquokkaops.io/ethpandaops/lodestar:fusaka-devnet-3
+  nimbus: docker-cache.ethquokkaops.io/ethpandaops/nimbus-eth2:fusaka-devnet-3
+  prysm: docker-cache.ethquokkaops.io/ethpandaops/prysm-beacon-chain:fusaka-devnet-3
+  prysm_validator: docker-cache.ethquokkaops.io/ethpandaops/prysm-validator:fusaka-devnet-3
+  teku: docker-cache.ethquokkaops.io/ethpandaops/teku:master
+  grandine: docker-cache.ethquokkaops.io/ethpandaops/grandine:fusaka-devnet-3
+### Execution layer clients
+  besu: docker-cache.ethquokkaops.io/ethpandaops/besu:main
+  geth: docker-cache.ethquokkaops.io/ethpandaops/geth:fusaka-devnet-3
+  erigon: docker-cache.ethquokkaops.io/ethpandaops/erigon:fusaka-devnet-3
+  ethereumjs: docker-cache.ethquokkaops.io/ethpandaops/ethereumjs:fusaka-devnet-3
+  nethermind: docker-cache.ethquokkaops.io/ethpandaops/nethermind:fusaka-devnet-3
+  reth: docker-cache.ethquokkaops.io/ethpandaops/reth:fusaka-devnet-3
+  nimbusel: docker-cache.ethquokkaops.io/ethpandaops/nimbus-eth1:fusaka-devnet-3
+
+# mev boost
+  mev_boost: docker-cache.ethquokkaops.io/ethpandaops/mev-boost:bharath-123-fusaka-devnet-3
+
+default_tooling_images:
+  mev_builder: docker-cache.ethquokkaops.io/ethpandaops/reth-rbuilder:bharath-123-fusaka-devnet-3
+  mev_relay: docker-cache.ethquokkaops.io/ethpandaops/mev-boost-relay:bharath-123-fusaka-devnet-3
+  xatu_sentry: docker-cache.ethquokkaops.io/ethpandaops/xatu:latest
+  xatu_cannon: docker-cache.ethquokkaops.io/ethpandaops/xatu:latest
+  xatu_mimicry: docker-cache.ethquokkaops.io/ethpandaops/xatu:latest
+  xatu_cl_mimicry: docker-cache.ethquokkaops.io/ethpandaops/xatu:latest
+  ethereum_metrics_exporter: docker-cache.ethquokkaops.io/ethpandaops/ethereum-metrics-exporter:latest
+  tx_fuzz: docker-cache.ethquokkaops.io/ethpandaops/tx-fuzz:latest
+  forkmon: docker-cache.ethquokkaops.io/skylenet/nodemonitor:darkmode
+  forky: docker-cache.ethquokkaops.io/ethpandaops/forky:latest
+  fauceth: docker-cache.ethquokkaops.io/skylenet/fauceth:fix_fee_estimation
+  powfaucet: docker-cache.ethquokkaops.io/pk910/powfaucet:v2-stable
+  homepage: docker-cache.ethquokkaops.io/ethpandaops/ethereum-testnet-homepage:latest
+  checkpointz: docker-cache.ethquokkaops.io/ethpandaops/checkpointz:0.0.6-fulu
+  blockscout: docker-cache.ethquokkaops.io/blockscout/blockscout:latest
+  blockscout_frontend: docker.ethquokkaops.io/gh/blockscout/frontend:latest
+  beacon_metrics_gazer: docker-cache.ethquokkaops.io/dapplion/beacon-metrics-gazer:latest
+  eth_fauceth: docker-cache.ethquokkaops.io/chainflag/eth-faucet:latest
+  blobscan: docker-cache.ethquokkaops.io/blossomlabs/blobscan:latest
+  blobscan_indexer: docker-cache.ethquokkaops.io/blossomlabs/blobscan-indexer:latest
+  dora: docker-cache.ethquokkaops.io/ethpandaops/dora:master-latest
+  dugtrio: docker-cache.ethquokkaops.io/ethpandaops/dugtrio:latest
+  ethereum_genesis_generator: docker-cache.ethquokkaops.io/ethpandaops/ethereum-genesis-generator:4.1.19
+  tracoor: docker-cache.ethquokkaops.io/ethpandaops/tracoor:0.0.26-debian
+  ncli: docker-cache.ethquokkaops.io/status-im/nimbus-eth2:unstable
+  lcli: docker-cache.ethquokkaops.io/ethpandaops/lighthouse:fusaka-devnet-3
+  zcli: electra
+  assertoor: docker-cache.ethquokkaops.io/ethpandaops/assertoor:master-latest
+  erpc: docker.ethquokkaops.io/gh/erpc/erpc:0.0.49
+  prometheus: docker-cache.ethquokkaops.io/prom/prometheus:v2.40.7
+  node_exporter: docker-cache.ethquokkaops.io/prom/node-exporter:v1.5.0
+  cl_bootnode: docker-cache.ethquokkaops.io/protolambda/eth2-bootnode:cleanup
+  json_rpc_snooper: docker-cache.ethquokkaops.io/ethpandaops/rpc-snooper:latest
+  nginx_proxy: docker.ethquokkaops.io/dh/nginx:alpine
+  nginx_proxy_gen: docker-cache.ethquokkaops.io/nginxproxy/docker-gen
+  nginx_proxy_acme: docker-cache.ethquokkaops.io/nginxproxy/acme-companion
+  vector: docker-cache.ethquokkaops.io/timberio/vector:0.46.1-alpine
+  spamoor: docker-cache.ethquokkaops.io/ethpandaops/spamoor:master-latest
+  blobber: docker-cache.ethquokkaops.io/ethpandaops/blobber:pr-43
+  syncoor_web: docker.ethquokkaops.io/gh/ethpandaops/syncoor-web:master
+  syncoor_server: docker.ethquokkaops.io/gh/ethpandaops/syncoor:master
