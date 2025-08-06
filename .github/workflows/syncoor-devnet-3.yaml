@@ -141,7 +141,7 @@ jobs:
         fi
 
     - name: Run Syncoor Test
-      uses: ethpandaops/syncoor@master
+      uses: ethpandaops/syncoor@fix-image-logic
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         server: https://syncoor-api.fusaka-devnet-3.ethpandaops.io
