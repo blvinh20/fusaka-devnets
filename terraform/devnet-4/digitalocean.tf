@@ -26,6 +26,20 @@ variable "digitalocean_regions" {
   ]
 }
 
+variable "digitalocean_regions_no_sgp1" {
+  default = [
+    "nyc1",
+    "lon1",
+    "nyc3",
+    "ams3",
+    "fra1",
+    "tor1",
+    "blr1",
+    "sfo3",
+    "syd1"
+  ]
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 //                                        LOCALS
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +64,11 @@ locals {
         vms = {
           "${i + 1}" = {
             tags   = "group_name:${vm_group.name},val_start:${vm_group.validator_start + (i * (vm_group.validator_end - vm_group.validator_start) / vm_group.count)},val_end:${min(vm_group.validator_start + ((i + 1) * (vm_group.validator_end - vm_group.validator_start) / vm_group.count), vm_group.validator_end)},supernode:${contains(["super"], split("-", vm_group.name)) || ((vm_group.validator_end - vm_group.validator_start) / vm_group.count >= 320) ? "True" : "False"}"
-            region = try(vm_group.region, var.digitalocean_regions[(i + index(local.vm_groups, vm_group)) % length(var.digitalocean_regions)])
+            region = try(vm_group.region, 
+              try(vm_group.size, contains(["super"], split("-", vm_group.name)) || ((vm_group.validator_end - vm_group.validator_start) / vm_group.count >= 320) ? "s-8vcpu-32gb-640gb-intel" : "s-8vcpu-16gb") == "s-8vcpu-32gb-640gb-intel" ?
+              var.digitalocean_regions_no_sgp1[(i + index(local.vm_groups, vm_group)) % length(var.digitalocean_regions_no_sgp1)] :
+              var.digitalocean_regions[(i + index(local.vm_groups, vm_group)) % length(var.digitalocean_regions)]
+            )
             size   = try(vm_group.size, contains(["super"], split("-", vm_group.name)) || ((vm_group.validator_end - vm_group.validator_start) / vm_group.count >= 320) ? "s-8vcpu-32gb-640gb-intel" : "s-8vcpu-16gb")
             ipv6   = try(vm_group.ipv6, true)
           }
@@ -227,41 +245,41 @@ resource "digitalocean_firewall" "main" {
   depends_on = [digitalocean_project_resources.droplets]
 }
 
-resource "digitalocean_firewall" "mev_relay" {
-  name        = "${var.ethereum_network}-nodes-mev-relay"
-  droplet_ids = [digitalocean_droplet.main["mev-relay-1"].id]
+# resource "digitalocean_firewall" "mev_relay" {
+#   name        = "${var.ethereum_network}-nodes-mev-relay"
+#   droplet_ids = [digitalocean_droplet.main["mev-relay-1"].id]
 
-  // mev-relay ports
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "9060-9062"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
+#   // mev-relay ports
+#   inbound_rule {
+#     protocol         = "tcp"
+#     port_range       = "9060-9062"
+#     source_addresses = ["0.0.0.0/0", "::/0"]
+#   }
 
-  // mev-relay ports
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "8645"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
+#   // mev-relay ports
+#   inbound_rule {
+#     protocol         = "tcp"
+#     port_range       = "8645"
+#     source_addresses = ["0.0.0.0/0", "::/0"]
+#   }
 
-  // Allow all outbound traffic
-  outbound_rule {
-    protocol              = "tcp"
-    port_range            = "1-65535"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-  outbound_rule {
-    protocol              = "udp"
-    port_range            = "1-65535"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-  outbound_rule {
-    protocol              = "icmp"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-  depends_on = [digitalocean_project_resources.droplets]
-}
+#   // Allow all outbound traffic
+#   outbound_rule {
+#     protocol              = "tcp"
+#     port_range            = "1-65535"
+#     destination_addresses = ["0.0.0.0/0", "::/0"]
+#   }
+#   outbound_rule {
+#     protocol              = "udp"
+#     port_range            = "1-65535"
+#     destination_addresses = ["0.0.0.0/0", "::/0"]
+#   }
+#   outbound_rule {
+#     protocol              = "icmp"
+#     destination_addresses = ["0.0.0.0/0", "::/0"]
+#   }
+#   depends_on = [digitalocean_project_resources.droplets]
+# }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //                                   DNS NAMES
@@ -273,7 +291,7 @@ data "cloudflare_zone" "default" {
 
 resource "cloudflare_record" "server_record_v4" {
   for_each = {
-    for vm in local.digitalocean_vms : "${vm.id}" => vm
+    for vm in local.digitalocean_vms : "${vm.id}" => vm if can(regex("-[123]$", vm.id))
   }
   zone_id = data.cloudflare_zone.default.id
   name    = "${each.value.name}.${var.ethereum_network}"
@@ -283,21 +301,21 @@ resource "cloudflare_record" "server_record_v4" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "server_record_v6" {
-  for_each = {
-    for vm in local.digitalocean_vms : "${vm.id}" => vm if vm.ipv6
-  }
-  zone_id = data.cloudflare_zone.default.id
-  name    = "${each.value.name}.${var.ethereum_network}"
-  type    = "AAAA"
-  value   = digitalocean_droplet.main[each.value.id].ipv6_address
-  proxied = false
-  ttl     = 120
-}
+# resource "cloudflare_record" "server_record_v6" {
+#   for_each = {
+#     for vm in local.digitalocean_vms : "${vm.id}" => vm if vm.ipv6
+#   }
+#   zone_id = data.cloudflare_zone.default.id
+#   name    = "${each.value.name}.${var.ethereum_network}"
+#   type    = "AAAA"
+#   value   = digitalocean_droplet.main[each.value.id].ipv6_address
+#   proxied = false
+#   ttl     = 120
+# }
 
 resource "cloudflare_record" "server_record_rpc_v4" {
   for_each = {
-    for vm in local.digitalocean_vms : "${vm.id}" => vm
+    for vm in local.digitalocean_vms : "${vm.id}" => vm if can(regex("-[123]$", vm.id))
   }
   zone_id = data.cloudflare_zone.default.id
   name    = "rpc.${each.value.name}.${var.ethereum_network}"
@@ -307,21 +325,21 @@ resource "cloudflare_record" "server_record_rpc_v4" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "server_record_rpc_v6" {
-  for_each = {
-    for vm in local.digitalocean_vms : "${vm.id}" => vm if vm.ipv6
-  }
-  zone_id = data.cloudflare_zone.default.id
-  name    = "rpc.${each.value.name}.${var.ethereum_network}"
-  type    = "AAAA"
-  value   = digitalocean_droplet.main[each.value.id].ipv6_address
-  proxied = false
-  ttl     = 120
-}
+# resource "cloudflare_record" "server_record_rpc_v6" {
+#   for_each = {
+#     for vm in local.digitalocean_vms : "${vm.id}" => vm if vm.ipv6
+#   }
+#   zone_id = data.cloudflare_zone.default.id
+#   name    = "rpc.${each.value.name}.${var.ethereum_network}"
+#   type    = "AAAA"
+#   value   = digitalocean_droplet.main[each.value.id].ipv6_address
+#   proxied = false
+#   ttl     = 120
+# }
 
 resource "cloudflare_record" "server_record_beacon_v4" {
   for_each = {
-    for vm in local.digitalocean_vms : "${vm.id}" => vm
+    for vm in local.digitalocean_vms : "${vm.id}" => vm if can(regex("-[123]$", vm.id))
   }
   zone_id = data.cloudflare_zone.default.id
   name    = "bn.${each.value.name}.${var.ethereum_network}"
@@ -331,17 +349,17 @@ resource "cloudflare_record" "server_record_beacon_v4" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "server_record_beacon_v6" {
-  for_each = {
-    for vm in local.digitalocean_vms : "${vm.id}" => vm if vm.ipv6
-  }
-  zone_id = data.cloudflare_zone.default.id
-  name    = "bn.${each.value.name}.${var.ethereum_network}"
-  type    = "AAAA"
-  value   = digitalocean_droplet.main[each.value.id].ipv6_address
-  proxied = false
-  ttl     = 120
-}
+# resource "cloudflare_record" "server_record_beacon_v6" {
+#   for_each = {
+#     for vm in local.digitalocean_vms : "${vm.id}" => vm if vm.ipv6
+#   }
+#   zone_id = data.cloudflare_zone.default.id
+#   name    = "bn.${each.value.name}.${var.ethereum_network}"
+#   type    = "AAAA"
+#   value   = digitalocean_droplet.main[each.value.id].ipv6_address
+#   proxied = false
+#   ttl     = 120
+# }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

@@ -24,7 +24,7 @@ reth_container_command_extra_args:
   - --chain=/network-config/genesis.json
   - --bootnodes={{ ethereum_el_bootnodes | join(',') }}
   - --http.api=trace,rpc,eth,net,debug,web3,admin,txpool
-  - --builder.gaslimit=45000000
+  - --builder.gaslimit=80000000
 ethereum_node_ipv6_enabled: false
 prometheus_config: |
   global:
