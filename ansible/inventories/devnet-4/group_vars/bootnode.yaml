@@ -43,7 +43,7 @@ lighthouse_container_volumes:
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
 lighthouse_container_command_extra_args:
   - --testnet-dir=/network-config
-  - --boot-nodes={{ ethereum_cl_bootnode | join(',') }}
+  - --boot-nodes={{ ethereum_cl_bootnode }}
 
 lighthouse_container_pull: true
 

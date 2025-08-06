@@ -5,10 +5,10 @@ default_ethereum_client_images:
   nimbus: docker-cache.ethquokkaops.io/ethpandaops/nimbus-eth2:fusaka-devnet-3
   prysm: docker-cache.ethquokkaops.io/ethpandaops/prysm-beacon-chain:fusaka-devnet-3
   prysm_validator: docker-cache.ethquokkaops.io/ethpandaops/prysm-validator:fusaka-devnet-3
-  teku: docker-cache.ethquokkaops.io/ethpandaops/teku:fusaka-devnet-3
+  teku: docker-cache.ethquokkaops.io/ethpandaops/teku:master
   grandine: docker-cache.ethquokkaops.io/ethpandaops/grandine:fusaka-devnet-3
 ### Execution layer clients
-  besu: docker-cache.ethquokkaops.io/ethpandaops/besu:fusaka-devnet-3
+  besu: docker-cache.ethquokkaops.io/ethpandaops/besu:main
   geth: docker-cache.ethquokkaops.io/ethpandaops/geth:fusaka-devnet-3
   erigon: docker-cache.ethquokkaops.io/ethpandaops/erigon:fusaka-devnet-3
   ethereumjs: docker-cache.ethquokkaops.io/ethpandaops/ethereumjs:fusaka-devnet-3
