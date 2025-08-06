@@ -25,7 +25,7 @@ nimbusel_container_command_extra_args:
   - --rpc-api=admin,eth,debug
   - --ws-api=admin,eth,debug
   - --log-level=debug
-  - --gas-limit=45000000
+  - --gas-limit=100000000
 prometheus_config: |
   global:
     scrape_interval: 30s
