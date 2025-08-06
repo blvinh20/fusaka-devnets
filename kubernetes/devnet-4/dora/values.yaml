@@ -1,0 +1,143 @@
+# Ansible managed. Don't change this file manually. Template info: /vendor/collections/ansible_collections/ethpandaops/general/roles/generate_kubernetes_config/templates/dora.yaml.j2
+
+dora:
+  fullnameOverride: dora
+  image:
+    repository: docker-cache.ethquokkaops.io/ethpandaops/dora
+    tag: master-latest
+    pullPolicy: Always
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+  ingress:
+    enabled: true
+    className: ingress-nginx-public
+    hosts:
+      - host: dora.fusaka-devnet-4.ethpandaops.io
+        paths:
+          - path: /
+            pathType: Prefix
+
+  name: fusaka-devnet-4
+  configPath: "https://config.fusaka-devnet-4.ethpandaops.io/cl/config.yaml"
+  validatorNamesInventory: "https://config.fusaka-devnet-4.ethpandaops.io/api/v1/nodes/validator-ranges"
+  proxyCount: 2
+  extraEnv:
+    - name: FRONTEND_PPROF
+      value: "true"
+    - name: FRONTEND_SHOW_SENSITIVE_PEER_INFOS
+      value: "true"
+    - name: API_ENABLED
+      value: "true"
+    - name: API_CORS_ORIGINS
+      value: "*"
+    - name: FRONTEND_SHOW_PEER_DAS_INFOS
+      value: "true"
+    - name: FRONTEND_ETH_EXPLORER_LINK
+      value: "https://explorer.fusaka-devnet-4.ethpandaops.io"
+    - name: FRONTEND_PUBLIC_RPC_URL
+      value: "https://rpc.fusaka-devnet-4.ethpandaops.io"
+    - name: FRONTEND_SHOW_SUBMIT_DEPOSIT
+      value: "true"
+    - name: FRONTEND_SHOW_SUBMIT_EL_REQUESTS
+      value: "true"
+  postgresql:
+    name: "dora-postgresql"
+    fullnameOverride: "dora-postgresql"
+
+  endpoints:
+  # Rpc
+  - url: http://prysm-geth-001:5052
+    name: rpc-prysm-geth-001
+    archive: true
+    priority: 1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-1.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-1
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-10.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-10
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-2.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-2
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-3.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-3
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-4.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-4
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-5.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-5
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-6.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-6
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-7.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-7
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-8.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-8
+    priority: -1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-9.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-9
+    priority: -1
+  executionEndpoints:
+  # Rpc
+  - url: http://geth-prysm-001:8545
+    name: rpc-prysm-geth-001
+    archive: true
+    priority: 1
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-1.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-1
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-1.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-10.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-10
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-10.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-2.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-2
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-2.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-3.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-3
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-3.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-4.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-4
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-4.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-5.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-5
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-5.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-6.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-6
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-6.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-7.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-7
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-7.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-8.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-8
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-8.fusaka-devnet-4.ethpandaops.io:8961
+  - url: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-9.fusaka-devnet-4.ethpandaops.io
+    name: bootnode-9
+    priority: -1
+    archive: false
+    engineSnooperUrl: http://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@rpc.bootnode-9.fusaka-devnet-4.ethpandaops.io:8961

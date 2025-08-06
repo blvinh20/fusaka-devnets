@@ -1,0 +1,50 @@
+xatu-mimicry:
+  enabled: true
+  fullnameOverride: xatu-mimicry
+  image:
+    repository: docker-cache.ethquokkaops.io/ethpandaops/xatu
+    tag: latest
+    pullPolicy: Always
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2000Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  config:
+    logging: "info"
+    metricsAddr: ":9090"
+    name: "fusaka-devnet-4-xatu-mimicry"
+    captureDelay: 3m
+    ntpServer: time.google.com
+    ethereum:
+      overrideNetworkName: "fusaka-devnet-4"
+    coordinator:
+      type: static
+      config:
+        retryInterval: 60s
+        nodeRecords:
+          - enode://dea8978b037969ebacebc666131481df29584b299c3f2893aee8e8c2f34cb45278f0c6d2fee14f94976c6f1eca84acd48f04251df8bbe556df44948d0a23123b@157.230.12.82:30303?discport=30303
+          - enode://a45eb088e76bdf7c95d4017fb495087f2e32958b684b4af1f5d682f182adba889938611c916f2614b3e28afd4db8c696a9c7194db1c49c36e05a82417d1070d3@165.227.206.16:30303?discport=30303
+          - enode://eb61d7ac56b9bd07e42874955a5d979e3a333d3a176e4711068bf7ad128a0dafbdd616d5f5706fad912b2a13741cb700c3d7558123c1b31ef56dc873db6d112b@68.183.38.115:30303?discport=30303
+          - enode://c9a7c32a0ddc48ade2e72cb78260e6cd2698ffe0e713fb7ba3c3035efe15bd216256f8f1ff6452100ad3b65dc4135d8a12f5140851414a5408b7c203dfa2267c@138.197.45.51:30303?discport=30303
+          - enode://7feab83b30194ab742c88cb7c0bca6f781783a4c84ad20b2cc0c0b731ad6d318ec5d4234d51567327d6ae8be20d6badae10bf37c88577dcafcef87ad265e04e6@209.38.102.238:30303?discport=30303
+          - enode://16ba807fa0240dc9b5fb4f7adec432dcca2fcab3bda40c824bd25f2e449fc7c605c4bfb83217337152860f08e914ec77d8b0cc5d6ef620b2a7712c7136121331@157.230.123.22:30303?discport=30303
+          - enode://44ed82176be6e297212083bf66185b332d5c8c48799e99ee1406d56494d16463bf0b3b4d45c931429eeb95de61160d6282f093ac9bc448462edd59945fc514e5@143.198.35.193:30303?discport=30303
+          - enode://3b29e16716b3de8de47f4caf2d9e102338d6e2556bf12ae92ffb0529d13d0639e6cdb00c5182351faa372fb0b916f6f52924be2d9fdaa7f031931e01b3336c8d@142.93.210.237:30303?discport=30303
+          - enode://644217517db8967ae586995c830a8c43ce107966a0460e025568308f5247c7f84f039939e390bf500177e70defcbdc4561bf090a990d071d269f5d234d3fb837@143.198.55.153:30303?discport=30303
+          - enode://a0d67ebddc4da3ebe9c1b982184360d9cbc1e53a88e2bd2c489ff603ee79130fd1f16425fe35e3f3372704ab509ee9aa33b2a3c89b7e5a4e8f003f799a0dfb0a@134.199.162.46:30303?discport=30303
+    outputs:
+    - name: grpc
+      type: xatu
+      config:
+        address: server.xatu-experimental.ethpandaops.io:443
+        maxQueueSize: 51200
+        tls: true
+        headers:
+          authorization: "Basic <path:/secrets/services/services.enc.yaml#xatu | jsonPath {.experimental.event_ingester_auth}>"
+        batchTimeout: 5s
+        exportTimeout: 30s
+        maxExportBatchSize: 512
