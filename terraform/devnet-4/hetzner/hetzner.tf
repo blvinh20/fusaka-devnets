@@ -20,9 +20,9 @@ variable "hcloud_ssh_key_fingerprint" {
 
 variable "hetzner_regions" {
   default = [
-    "nbg1",
     "fsn1",
-    "hel1"
+    "hel1",
+    "nbg1"
   ]
 }
 
@@ -56,7 +56,7 @@ locals {
             labels = "group_name:${vm_group.name},val_start:${vm_group.validator_start + (i * (vm_group.validator_end -
               vm_group.validator_start) / vm_group.count)},val_end:${min(vm_group.validator_start + ((i + 1) * (vm_group.validator_end -
             vm_group.validator_start) / vm_group.count), vm_group.validator_end)},supernode:False"
-            location     = try(vm_group.location, local.hcloud_default_location)
+            location     = try(vm_group.location, var.hetzner_regions[i % length(var.hetzner_regions)])
             size         = try(vm_group.size, local.hcloud_default_server_type)
             ansible_vars = try(vm_group.ansible_vars, null)
             ipv4_enabled = try(vm_group.ipv4_enabled, true)
@@ -159,7 +159,7 @@ data "cloudflare_zone" "default" {
 
 resource "cloudflare_record" "server_record" {
   for_each = {
-    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv4_enabled, true) == true
+    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv4_enabled, true) == true && can(regex("-[123]$", vm.id))
   }
   zone_id = data.cloudflare_zone.default.id
   name    = "${each.value.name}.${var.ethereum_network}"
@@ -169,21 +169,21 @@ resource "cloudflare_record" "server_record" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "server_record6" {
-  for_each = {
-    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv6_enabled, true) == true
-  }
-  zone_id = data.cloudflare_zone.default.id
-  name    = "${each.value.name}.${var.ethereum_network}"
-  type    = "AAAA"
-  value   = hcloud_server.main[each.value.id].ipv6_address
-  proxied = false
-  ttl     = 120
-}
+# resource "cloudflare_record" "server_record6" {
+#   for_each = {
+#     for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv6_enabled, true) == true
+#   }
+#   zone_id = data.cloudflare_zone.default.id
+#   name    = "${each.value.name}.${var.ethereum_network}"
+#   type    = "AAAA"
+#   value   = hcloud_server.main[each.value.id].ipv6_address
+#   proxied = false
+#   ttl     = 120
+# }
 
 resource "cloudflare_record" "server_record_rpc" {
   for_each = {
-    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv4_enabled, true) == true
+    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv4_enabled, true) == true && can(regex("-[123]$", vm.id))
   }
   zone_id = data.cloudflare_zone.default.id
   name    = "rpc.${each.value.name}.${var.ethereum_network}"
@@ -193,21 +193,21 @@ resource "cloudflare_record" "server_record_rpc" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "server_record_rpc6" {
-  for_each = {
-    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv6_enabled, true) == true
-  }
-  zone_id = data.cloudflare_zone.default.id
-  name    = "rpc.${each.value.name}.${var.ethereum_network}"
-  type    = "AAAA"
-  value   = hcloud_server.main[each.value.id].ipv6_address
-  proxied = false
-  ttl     = 120
-}
+# resource "cloudflare_record" "server_record_rpc6" {
+#   for_each = {
+#     for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv6_enabled, true) == true
+#   }
+#   zone_id = data.cloudflare_zone.default.id
+#   name    = "rpc.${each.value.name}.${var.ethereum_network}"
+#   type    = "AAAA"
+#   value   = hcloud_server.main[each.value.id].ipv6_address
+#   proxied = false
+#   ttl     = 120
+# }
 
 resource "cloudflare_record" "server_record_beacon" {
   for_each = {
-    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv4_enabled, true) == true
+    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv4_enabled, true) == true && can(regex("-[123]$", vm.id))
   }
   zone_id = data.cloudflare_zone.default.id
   name    = "bn.${each.value.name}.${var.ethereum_network}"
@@ -217,17 +217,17 @@ resource "cloudflare_record" "server_record_beacon" {
   ttl     = 120
 }
 
-resource "cloudflare_record" "server_record_beacon6" {
-  for_each = {
-    for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv6_enabled, true) == true
-  }
-  zone_id = data.cloudflare_zone.default.id
-  name    = "bn.${each.value.name}.${var.ethereum_network}"
-  type    = "AAAA"
-  value   = hcloud_server.main[each.value.id].ipv6_address
-  proxied = false
-  ttl     = 120
-}
+# resource "cloudflare_record" "server_record_beacon6" {
+#   for_each = {
+#     for vm in local.hcloud_vms : "${vm.id}" => vm if coalesce(vm.ipv6_enabled, true) == true
+#   }
+#   zone_id = data.cloudflare_zone.default.id
+#   name    = "bn.${each.value.name}.${var.ethereum_network}"
+#   type    = "AAAA"
+#   value   = hcloud_server.main[each.value.id].ipv6_address
+#   proxied = false
+#   ttl     = 120
+# }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

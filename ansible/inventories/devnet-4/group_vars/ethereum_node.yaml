@@ -33,8 +33,6 @@ ethereum_el_bootnodes:
   - "{{ hostvars['bootnode-9']['ethereum_node_fact_el_enode'] }}"
   - "{{ hostvars['bootnode-10']['ethereum_node_fact_el_enode'] }}"
 
-ethereum_node_xatu_sentry_enabled: true
-
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus
 prometheus_remote_write_username: "{{ secret_prometheus_remote_write.username }}"
