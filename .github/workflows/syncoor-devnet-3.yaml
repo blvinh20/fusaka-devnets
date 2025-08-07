@@ -18,7 +18,7 @@ on:
       run-timeout:
         description: 'Timeout for the sync test (in minutes)'
         required: false
-        default: '240'
+        default: '1800'
         type: string
       checkpoint-sync-enabled:
         description: 'Enable checkpoint sync'
@@ -59,6 +59,7 @@ on:
 env:
   INSTALL_RCLONE_VERSION: v1.68.2
   S3_BUCKET: ethpandaops-syncoor-data
+  DEFAULT_CHECKPOINT_SYNC_URL: https://checkpoint-sync.fusaka-devnet-3.ethpandaops.io
 
 jobs:
   sync:
@@ -70,7 +71,7 @@ jobs:
     # - 24h -> 1440m
     # - 48h -> 2880m
     # - 72h -> 4320m
-    timeout-minutes: ${{ fromJSON(inputs.run-timeout || '240') }}
+    timeout-minutes: ${{ github.event_name == 'schedule' && 45 || fromJSON(inputs.run-timeout || '1800') }}
     # Self-hosted runner sizes:
     # - ccx13: 2 cores, 8GB, 80GB disk
     # - ccx23: 4 cores, 16GB, 160GB disk
@@ -160,7 +161,7 @@ jobs:
             ''
           }}
         check-interval: 30s
-        run-timeout: ${{ format('{0}m', inputs.run-timeout || '240') }}
+        run-timeout: ${{ github.event_name == 'schedule' && '45m' || format('{0}m', inputs.run-timeout || '1800') }}
         log-level: info
         report-dir: ./test-reports
         s3-upload: true
@@ -168,8 +169,8 @@ jobs:
         s3-path: devnets/${{ matrix.network }}
         rclone-config: ${{ secrets.SYNCOOR_RCLONE_CONFIG }}
         rclone-version: ${{ env.INSTALL_RCLONE_VERSION }}
-        checkpoint-sync-enabled: ${{ inputs.checkpoint-sync-enabled }}
-        checkpoint-sync-url: ${{ inputs.checkpoint-sync-url }}
+        checkpoint-sync-enabled: ${{ github.event_name == 'schedule' && true || inputs.checkpoint-sync-enabled }}
+        checkpoint-sync-url: ${{ inputs.checkpoint-sync-url || env.DEFAULT_CHECKPOINT_SYNC_URL }}
         supernode: ${{ inputs.supernode }}
         image: ${{ inputs.image || 'docker.ethquokkaops.io/dh/ethpandaops/syncoor:master' }}
         git-ref: ${{ inputs.git-ref }}
