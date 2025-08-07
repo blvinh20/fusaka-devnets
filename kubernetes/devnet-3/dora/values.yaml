@@ -54,6 +54,10 @@ dora:
       name: "Flashbots"
       url: "http://mev-relay-1.fusaka-devnet-3.ethpandaops.io:9062/"
 
+  ranges: |
+    816-817: caplin
+    818: vouch
+
   endpoints:
   # Rpc
   - url: http://prysm-geth-001:5052
