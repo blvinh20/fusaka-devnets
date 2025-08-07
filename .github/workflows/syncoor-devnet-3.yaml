@@ -2,7 +2,7 @@ name: Syncoor - Devnet 3
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Daily at 02:30 UTC
+    - cron: '30 2 * * *'  # At 2:30am daily
   workflow_dispatch:
     inputs:
       el-client:
@@ -18,7 +18,7 @@ on:
       run-timeout:
         description: 'Timeout for the sync test (in minutes)'
         required: false
-        default: '180'
+        default: '240'
         type: string
       checkpoint-sync-enabled:
         description: 'Enable checkpoint sync'
@@ -141,7 +141,7 @@ jobs:
         fi
 
     - name: Run Syncoor Test
-      uses: ethpandaops/syncoor@fix-image-logic
+      uses: ethpandaops/syncoor@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         server: https://syncoor-api.fusaka-devnet-3.ethpandaops.io
@@ -160,7 +160,7 @@ jobs:
             ''
           }}
         check-interval: 30s
-        run-timeout: ${{ inputs.run-timeout && format('{0}m', inputs.run-timeout) || '60m' }}
+        run-timeout: ${{ format('{0}m', inputs.run-timeout || '240') }}
         log-level: info
         report-dir: ./test-reports
         s3-upload: true
