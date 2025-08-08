@@ -56,7 +56,7 @@ dora:
 
   ranges: |
     816-817: caplin
-    818: vouch
+    818-918: vouch
 
   endpoints:
   # Rpc
