@@ -1,6 +1,6 @@
+ethereum_node_ipv6_enabled: true
 
-lodestar_container_env:
-  VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
-  VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
-  LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-  DEBUG: "discv5*"
+ethereum_node_docker_watchtower_enabled: true
+
+docker_watchtower_container_additional_args:
+  - --interval=300
