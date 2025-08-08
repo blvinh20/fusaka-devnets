@@ -3,6 +3,19 @@
   roles:
     - role: ethpandaops.general.cl_bootnode
       tags: [cl_bootnode]
+    - role: ethpandaops.general.cl_bootnode
+      tags: [cl_bootnode]
+    - role: ethpandaops.general.ethereum_testnet_config
+      tags: [ethereum, eth_testnet_config, ethereum_testnet_config]
+    - role: ethpandaops.general.validator_keys
+      when: ethereum_node_cl_validator_enabled == true
+      tags: [ethereum, validator_keys]
+    - role: ethpandaops.general.ethereum_node
+      tags: [ethereum, ethereum_node]
+    - role: ethpandaops.general.docker_nginx_proxy
+      tags: [docker_nginx_proxy]
+    - role: ethpandaops.general.generate_basic_auth_nginx
+      tags: [docker_nginx_proxy]
 
 - hosts: ethereum_node
   serial: "{{ batch_count | default('100%') }}"
@@ -41,7 +54,7 @@
             rate_upload: 1000mbit
       tags: [traffic_control]
 
-- hosts: ethereum_node
+- hosts: bootnode-1
   become: true
   tasks:
     - name: Refresh inventory web
@@ -71,12 +84,6 @@
     - role: ethpandaops.general.tx_fuzz
       tags: [tx_fuzz, tx_fuzz_txs]
 
-
-- hosts: bootnode
-  become: true
-  roles:
-    - role: ethpandaops.general.ethereum_inventory_web
-      tags: [eth_inventory_web, ethereum_inventory_web]
 
 - hosts: dora
   become: true
