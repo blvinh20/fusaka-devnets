@@ -54,3 +54,4 @@ lodestar_validator_container_command_extra_args:
   - --graffiti={{ ansible_hostname }}
 lodestar_validator_datadir: /data/lodestar-validator
 lodestar_container_pull: true
+ethereum_node_ipv6_enabled: false
