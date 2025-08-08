@@ -25,7 +25,7 @@ eth_inventory_web_container_env:
   VIRTUAL_PATH: "/meta/api"
   VIRTUAL_DEST: "/"
   LETSENCRYPT_HOST: "{{ server_fqdn }}"
-
+ethereum_node_xatu_sentry_enabled: true
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
 ethereum_node_cl: lighthouse
