@@ -8,7 +8,7 @@ default_ethereum_client_images:
   teku: docker.ethquokkaops.io/dh/ethpandaops/teku:master
   grandine: docker-cache.ethquokkaops.io/ethpandaops/grandine:fusaka-devnet-3
 ### Execution layer clients
-  besu: docker-cache.ethquokkaops.io/ethpandaops/besu:main
+  besu: docker.ethquokkaops.io/dh/ethpandaops/besu:main-9a8a032
   geth: docker-cache.ethquokkaops.io/ethpandaops/geth:fusaka-devnet-3
   erigon: docker-cache.ethquokkaops.io/ethpandaops/erigon:fusaka-devnet-3
   ethereumjs: docker-cache.ethquokkaops.io/ethpandaops/ethereumjs:fusaka-devnet-3
