@@ -57,10 +57,9 @@ prometheus_config: |
   remote_write:
     - queue_config:
         batch_send_deadline: 5s
-        max_backoff: 500ms
-        max_samples_per_send: 500
-        min_backoff: 50ms
-        max_shards: 100
+        max_samples_per_send: 3000
+        max_shards: 20
+        capacity: 50000 # It is recommended to set capacity to 3-10 times max_samples_per_send.
       url: {{ prometheus_remote_push_url }}
       remote_timeout: 10s
       basic_auth:

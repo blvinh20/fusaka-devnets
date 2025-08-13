@@ -46,7 +46,7 @@ ethereum_el_bootnodes:
   - "{{ hostvars['teku-geth-super-1']['ethereum_node_fact_el_enode'] }}"
 
 # role: ethpandaops.general.prometheus
-prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus
+prometheus_remote_push_url: https://victoriametrics-devnets.analytics.production.platform.ethpandaops.io/insert/1/prometheus
 prometheus_remote_write_username: "{{ secret_prometheus_remote_write.username }}"
 prometheus_remote_write_password: "{{ secret_prometheus_remote_write.password }}"
 prometheus_config: |
@@ -64,11 +64,12 @@ prometheus_config: |
       supernode: "{{ ethereum_node_cl_supernode_enabled | bool | default(false) }}"
   remote_write:
     - queue_config:
+        # Read https://prometheus.io/docs/practices/remote_write/#resource-usage
+        # for more details on the parameters below
         batch_send_deadline: 5s
-        max_backoff: 500ms
-        max_samples_per_send: 500
-        min_backoff: 50ms
-        max_shards: 100
+        max_samples_per_send: 3000
+        max_shards: 20
+        capacity: 50000 # It is recommended to set capacity to 3-10 times max_samples_per_send.
       url: {{ prometheus_remote_push_url }}
       remote_timeout: 10s
       basic_auth:
