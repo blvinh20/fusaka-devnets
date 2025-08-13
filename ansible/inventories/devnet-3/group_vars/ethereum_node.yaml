@@ -33,7 +33,6 @@ prometheus_config: |
         max_samples_per_send: 10000
         max_shards: 20
         capacity: 50000 # It is recommended to set capacity to 3-10 times max_samples_per_send.
-        sample_age_limit: 300s # 5 minutes
       url: {{ prometheus_remote_push_url }}
       remote_timeout: 10s
       basic_auth:
