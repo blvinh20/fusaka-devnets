@@ -3,18 +3,18 @@ default_ethereum_client_images:
   lighthouse: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:unstable
   lodestar: docker.ethquokkaops.io/dh/ethpandaops/lodestar:fusaka-devnet-4-aac4d9d
   nimbus: docker.ethquokkaops.io/dh/ethpandaops/nimbus-eth2:fusaka-devnet-3-eac23d6
-  prysm: docker-cache.ethquokkaops.io/ethpandaops/prysm-beacon-chain:fusaka-devnet-3
-  prysm_validator: docker-cache.ethquokkaops.io/ethpandaops/prysm-validator:fusaka-devnet-3
+  prysm: docker.ethquokkaops.io/dh/ethpandaops/prysm-beacon-chain:fusaka-devnet-3
+  prysm_validator: docker.ethquokkaops.io/dh/ethpandaops/prysm-validator:fusaka-devnet-3
   teku: docker.ethquokkaops.io/dh/ethpandaops/teku:master
-  grandine: docker-cache.ethquokkaops.io/ethpandaops/grandine:fusaka-devnet-3
+  grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:fusaka-devnet-3
 ### Execution layer clients
   besu: docker.ethquokkaops.io/dh/ethpandaops/besu:main-9a8a032
-  geth: docker-cache.ethquokkaops.io/ethpandaops/geth:fusaka-devnet-3
-  erigon: docker-cache.ethquokkaops.io/ethpandaops/erigon:fusaka-devnet-3
-  ethereumjs: docker-cache.ethquokkaops.io/ethpandaops/ethereumjs:fusaka-devnet-3
-  nethermind: docker-cache.ethquokkaops.io/ethpandaops/nethermind:fusaka-devnet-3
-  reth: docker-cache.ethquokkaops.io/ethpandaops/reth:fusaka-devnet-3
-  nimbusel: docker-cache.ethquokkaops.io/ethpandaops/nimbus-eth1:fusaka-devnet-3
+  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:eip4844-transition-updatefraction
+  erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:fusaka-devnet-3
+  ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:fusaka-devnet-3
+  nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:fusaka-devnet-3
+  reth: docker.ethquokkaops.io/dh/ethpandaops/reth:fusaka-devnet-3
+  nimbusel: docker.ethquokkaops.io/dh/ethpandaops/nimbus-eth1:fusaka-devnet-3
 
 # mev boost
   mev_boost: docker-cache.ethquokkaops.io/ethpandaops/mev-boost:bharath-123-fusaka-devnet-3

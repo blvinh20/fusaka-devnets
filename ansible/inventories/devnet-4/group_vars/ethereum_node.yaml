@@ -23,7 +23,9 @@ ethereum_cl_bootnodes:
   - "{{ hostvars['lighthouse-nethermind-super-1']['ethereum_node_fact_cl_enr'] }}"
   - "{{ hostvars['lighthouse-nethermind-super-2']['ethereum_node_fact_cl_enr'] }}"
   - "{{ hostvars['lighthouse-reth-super-1']['ethereum_node_fact_cl_enr'] }}"
-  - "{{ hostvars['lighthouse-reth-super-2']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['lodestar-geth-super-1']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['prysm-geth-super-1']['ethereum_node_fact_cl_enr'] }}"
+  - "{{ hostvars['teku-geth-super-1']['ethereum_node_fact_cl_enr'] }}"
 ethereum_el_bootnodes:
   # - "{{ hostvars['bootnode-1']['ethereum_node_fact_el_enode'] }}"
   # - "{{ hostvars['bootnode-2']['ethereum_node_fact_el_enode'] }}"
@@ -39,8 +41,9 @@ ethereum_el_bootnodes:
   - "{{ hostvars['lighthouse-nethermind-super-1']['ethereum_node_fact_el_enode'] }}"
   - "{{ hostvars['lighthouse-nethermind-super-2']['ethereum_node_fact_el_enode'] }}"
   - "{{ hostvars['lighthouse-reth-super-1']['ethereum_node_fact_el_enode'] }}"
-  - "{{ hostvars['lighthouse-reth-super-2']['ethereum_node_fact_el_enode'] }}"
-
+  - "{{ hostvars['lodestar-geth-super-1']['ethereum_node_fact_el_enode'] }}"
+  - "{{ hostvars['prysm-geth-super-1']['ethereum_node_fact_el_enode'] }}"
+  - "{{ hostvars['teku-geth-super-1']['ethereum_node_fact_el_enode'] }}"
 
 # role: ethpandaops.general.prometheus
 prometheus_remote_push_url: https://victoriametrics-public.analytics.production.platform.ethpandaops.io/insert/1/prometheus
