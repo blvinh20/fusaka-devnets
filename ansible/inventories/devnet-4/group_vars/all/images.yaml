@@ -9,7 +9,7 @@ default_ethereum_client_images:
   grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:fusaka-devnet-3
 ### Execution layer clients
   besu: docker.ethquokkaops.io/dh/ethpandaops/besu:main-9a8a032
-  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:eip4844-transition-updatefraction-effde81
+  geth: docker.ethquokkaops.io/dh/ethpandaops/geth:eip4844-transition-updatefraction-2d526d2
   erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:fusaka-devnet-3
   ethereumjs: docker.ethquokkaops.io/dh/ethpandaops/ethereumjs:fusaka-devnet-3
   nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:fusaka-devnet-3
