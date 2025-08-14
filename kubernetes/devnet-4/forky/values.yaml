@@ -18,7 +18,7 @@ forky:
     enabled: true
     className: ingress-nginx-public
     hosts:
-      - host: forky.fusaka-devnet-4.ethpandaops.io
+      - host: forky-new.fusaka-devnet-4.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
