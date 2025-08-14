@@ -1,12 +1,12 @@
 default_ethereum_client_images:
 ### Consensus layer clients
-  lighthouse: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:unstable
+  lighthouse: docker.ethquokkaops.io/dh/ethpandaops/lighthouse:jimmygchen-jimmygchen-fusaka-devnet-4-revive-cdc417f
   lodestar: docker.ethquokkaops.io/dh/ethpandaops/lodestar:fusaka-devnet-4-aac4d9d
   nimbus: docker.ethquokkaops.io/dh/ethpandaops/nimbus-eth2:fusaka-devnet-3-eac23d6
   prysm: docker.ethquokkaops.io/dh/ethpandaops/prysm-beacon-chain:fusaka-devnet-3
   prysm_validator: docker.ethquokkaops.io/dh/ethpandaops/prysm-validator:fusaka-devnet-3
   teku: docker.ethquokkaops.io/dh/ethpandaops/teku:master
-  grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:fusaka-devnet-3
+  grandine: docker.ethquokkaops.io/dh/ethpandaops/grandine:peerdas-fulu-cdccf6c
 ### Execution layer clients
   besu: docker.ethquokkaops.io/dh/ethpandaops/besu:main-9a8a032
   geth: docker.ethquokkaops.io/dh/ethpandaops/geth:eip4844-transition-updatefraction-2d526d2
