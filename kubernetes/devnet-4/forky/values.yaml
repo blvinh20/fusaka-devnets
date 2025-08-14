@@ -10,15 +10,15 @@ forky:
   resources:
     requests:
       cpu: 256m
-      memory: 512Mi
+      memory: 12Gi
     limits:
       cpu: 1000m
-      memory: 2Gi
+      memory: 14Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
     hosts:
-      - host: forky.fusaka-devnet-4.ethpandaops.io
+      - host: forky-new.fusaka-devnet-4.ethpandaops.io
         paths:
           - path: /
             pathType: Prefix
@@ -49,7 +49,7 @@ forky:
       addr: ":9090"
       enabled: true
     forky:
-      retention_period: "24h"
+      retention_period: "72h"
       store:
         type: s3
         config:
@@ -67,273 +67,273 @@ forky:
             slots_per_epoch: 32
             genesis_time: 1754640000
       sources:
-        - name: bootnode-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-besu-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-besu-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-erigon-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-erigon-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-geth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-geth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-nethermind-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-nimbusel-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-nimbusel-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-nimbusel-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: grandine-reth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-reth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-besu-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-besu-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-besu-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-besu-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-erigon-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-erigon-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-erigon-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-erigon-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-geth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-geth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-nethermind-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-nethermind-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-nimbusel-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-reth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-reth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lighthouse-reth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-reth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-besu-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-besu-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-erigon-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-erigon-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-geth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-geth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-geth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-geth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-nethermind-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-nethermind-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: lodestar-reth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-reth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-besu-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-besu-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-besu-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-besu-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-erigon-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-erigon-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-geth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-geth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-geth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-geth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-nethermind-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-nethermind-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-nimbusel-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: nimbus-reth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-reth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-besu-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-besu-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-besu-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-besu-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-erigon-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-erigon-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-erigon-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-erigon-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-geth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-geth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-nethermind-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-nethermind-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-nimbusel-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-reth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-reth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: prysm-reth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-reth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-besu-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-besu-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-besu-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-besu-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-erigon-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-erigon-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-erigon-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-erigon-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-geth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-geth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-geth-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-geth-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-nethermind-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-nethermind-super-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-nimbusel-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
-        - name: teku-reth-full-1
-          type: "beacon_node"
-          config:
-            address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-reth-full-1.fusaka-devnet-4.ethpandaops.io
-            polling_interval: "12s"
+        # - name: bootnode-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.bootnode-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-besu-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-besu-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-erigon-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-erigon-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-geth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-geth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-nethermind-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-nimbusel-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-nimbusel-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-nimbusel-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: grandine-reth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.grandine-reth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-besu-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-besu-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-besu-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-besu-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-erigon-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-erigon-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-erigon-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-erigon-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-geth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-geth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-nethermind-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-nethermind-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-nimbusel-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-reth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-reth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lighthouse-reth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lighthouse-reth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-besu-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-besu-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-erigon-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-erigon-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-geth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-geth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-geth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-geth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-nethermind-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-nethermind-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: lodestar-reth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.lodestar-reth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-besu-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-besu-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-besu-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-besu-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-erigon-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-erigon-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-geth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-geth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-geth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-geth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-nethermind-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-nethermind-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-nimbusel-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: nimbus-reth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.nimbus-reth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-besu-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-besu-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-besu-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-besu-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-erigon-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-erigon-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-erigon-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-erigon-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-geth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-geth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-nethermind-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-nethermind-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-nimbusel-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-reth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-reth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: prysm-reth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.prysm-reth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-besu-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-besu-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-besu-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-besu-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-erigon-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-erigon-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-erigon-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-erigon-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-geth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-geth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-geth-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-geth-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-nethermind-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-nethermind-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-nethermind-super-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-nethermind-super-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-nimbusel-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-nimbusel-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
+        # - name: teku-reth-full-1
+        #   type: "beacon_node"
+        #   config:
+        #     address: https://<path:/secrets/services/services.enc.yaml#ethereum | jsonPath {.testnets.fusaka-devnets.node_ingress.combined}>@bn.teku-reth-full-1.fusaka-devnet-4.ethpandaops.io
+        #     polling_interval: "12s"
