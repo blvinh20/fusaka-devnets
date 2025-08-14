@@ -10,10 +10,10 @@ forky:
   resources:
     requests:
       cpu: 256m
-      memory: 512Mi
+      memory: 12Gi
     limits:
       cpu: 1000m
-      memory: 12Gi
+      memory: 14Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
