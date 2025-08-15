@@ -28,42 +28,51 @@ eth_inventory_web_container_env:
 ethereum_node_xatu_sentry_enabled: true
 # role: ethpandaops.general.ethereum_node
 ethereum_node_el: geth
-ethereum_node_cl: lighthouse
+ethereum_node_cl: prysm
 ethereum_node_cl_validator_enabled: false
 
 
 # role: ethpandaops.general.bootstrap
 bootstrap_default_user_authorized_keys_github_team_cl:
-  - AgeManning
-  - ethdreamer
-  - paulhauner
-  - pawanjay176
-  - michaelsproul
-  - antondlr
-  - realbigsean
-  - jimmygchen
-  - dapplion
-  - dknopik
-
-
-# role: ethpandaops.general.lighthouse
-lighthouse_container_name: beacon
-lighthouse_validator_container_name: validator
-lighthouse_container_image: "{{ default_ethereum_client_images.lighthouse }}"
-lighthouse_container_env:
+  - kasey
+  - terencechain
+  - potuz
+  - nisdas
+  - prestonvanloon
+  - rkapka
+  - nalepae
+  - james-prysm
+ethereum_node_skip_cleanup: false
+# role: ethpandaops.general.ethereum_node
+prysm_container_tty: true
+# role: ethpandaops.general.prysm
+prysm_container_name: beacon
+prysm_validator_container_name: validator
+prysm_container_image: "{{ default_ethereum_client_images.prysm }}"
+prysm_container_env:
   VIRTUAL_HOST: "{{ ethereum_node_beacon_hostname }}"
   VIRTUAL_PORT: "{{ ethereum_node_cl_ports_http_beacon | string }}"
   LETSENCRYPT_HOST: "{{ ethereum_node_beacon_hostname }}"
-lighthouse_container_volumes:
-  - "{{ lighthouse_datadir }}:/data"
-  - "{{ lighthouse_auth_jwt_path }}:/execution-auth.jwt:ro"
+prysm_container_volumes:
+  - "{{ prysm_datadir }}:/data"
+  - "{{ prysm_auth_jwt_path }}:/execution-auth.jwt:ro"
   - "{{ eth_testnet_config_dir }}:/network-config:ro"
-lighthouse_container_command_extra_args:
-  - --testnet-dir=/network-config
-  - --boot-nodes={{ ethereum_bootnodes_enr | join(',') }}
-  - --target-peers=500
-
-lighthouse_container_pull: true
+prysm_container_entrypoint:
+  - /app/cmd/beacon-chain/beacon-chain
+prysm_container_command_extra_args: >-
+  {{ prysm_container_command_extra_simple_args + prysm_container_command_extra_bootnode_args }}
+prysm_container_command_extra_simple_args:
+  - --grpc-gateway-corsdomain=*
+  - --chain-config-file=/network-config/config.yaml
+  - --genesis-state=/network-config/genesis.ssz
+  - --contract-deployment-block={{ ethereum_network_deposit_contract_block }}
+  - --min-sync-peers=1
+  - --pprof
+  - --enable-debug-rpc-endpoints
+  - --verbosity=debug
+  - --p2p-max-peers=500
+prysm_container_command_extra_bootnode_args: >-
+  {{ ethereum_bootnodes_enr | map('regex_replace', '^', '--bootstrap-node=') | list }}
 
 # role: ethpandaops.general.geth
 geth_container_name: execution

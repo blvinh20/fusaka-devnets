@@ -1,6 +1,14 @@
 resource "hcloud_firewall" "machine_firewall" {
   name = "${var.ethereum_network}-firewall"
 
+  # Allow incoming ping
+  rule {
+    description = "Allow incoming ping"
+    direction   = "in"
+    protocol    = "icmp"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+  }
+
   # SSH
   rule {
     description = "Allow SSH"
