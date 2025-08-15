@@ -11,8 +11,8 @@ spamoor:
       cpu: 250m
       memory: 500Mi
     limits:
-      cpu: 2000m
-      memory: 2Gi
+      cpu: 6000m
+      memory: 6Gi
   ingress:
     enabled: true
     className: ingress-nginx-public
