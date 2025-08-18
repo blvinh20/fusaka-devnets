@@ -166,7 +166,6 @@ reth_container_env:
   COINBASE_SECRET_KEY: "{{ secret_mev_signingkey }}"
   RELAY_SECRET_KEY: "{{ secret_mev_signingkey }}"
   OPTIMISTIC_RELAY_SECRET_KEY: "{{ secret_mev_signingkey }}"
-  RUST_LOG: "payload_builder=trace,txpool=trace"
 
 reth_container_ports_ipv4:
   - "127.0.0.1:{{ reth_ports_http_rpc }}:{{ reth_ports_http_rpc }}"
@@ -195,7 +194,7 @@ ethereum_node_json_rpc_snooper_engine_enabled: false
 
 reth_rbuilder_config: |
   log_json = true
-  log_level = "trace,rbuilder=trace"
+  log_level = "debug,rbuilder=debug"
   redacted_telemetry_server_port = 6061
   redacted_telemetry_server_ip = "0.0.0.0"
   full_telemetry_server_port = 6060
