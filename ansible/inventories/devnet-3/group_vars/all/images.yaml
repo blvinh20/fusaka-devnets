@@ -13,7 +13,7 @@ default_ethereum_client_images:
   erigon: docker.ethquokkaops.io/dh/ethpandaops/erigon:main
   nethermind: docker.ethquokkaops.io/dh/ethpandaops/nethermind:master
   reth: docker.ethquokkaops.io/dh/ethpandaops/reth:fusaka-devnet-3
-  nimbusel: docker.ethquokkaops.io/dh/ethpandaops/nimbus-eth1:fusaka-devnet-3
+  nimbusel: docker.ethquokkaops.io/dh/ethpandaops/nimbus-eth1:master
 
 # mev boost
   mev_boost: docker.ethquokkaops.io/dh/ethpandaops/mev-boost:develop
