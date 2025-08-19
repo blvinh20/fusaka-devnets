@@ -7,6 +7,5 @@ prysm_container_command_extra_simple_args:
   - --pprof
   - --enable-debug-rpc-endpoints
   - --verbosity=debug
-  - --subscribe-all-subnets
-  - --data-columns-withhold-count=64
+  #- --data-columns-withhold-count=64
 ethereum_node_mev_boost_enabled: false
